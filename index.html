@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-voting</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <img src="download-removebg-preview.png" alt="Login Icon" class="center-screen zoom-animation">
+
+
+
+<div id="mainContent" class="hidden">
+  <header>
+    <nav>
+        <img src="download-removebg-preview.png" alt="">
+        
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html" >About</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="https://www.timesnownews.com/india/vote-from-home-what-is-home-voting-who-is-eligible-how-to-apply-all-questions-answered-article-104333445">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="results.html">Result</a></li>
+        </ul>
+        <!-- <button>Log In</button> -->
+    </nav>
+    
+    <div class="headline">
+      <span class="slide-in" style="--delay:0s;"><span class="highlight">Your Voice</span></span>
+      <span class="slide-in" style="--delay:0.5s;"><span class="highlight">Your Vote</span></span>
+      <span class="slide-in" style="--delay:1s;"><span class="highlight">Our Future</span></span>
+    </div>
+
+    <div class="button-container">
+      <a href="login.html" id="voteLink">
+        <button id="voteNowBtn">Vote Now</button>
+      </a>
+      <p id="votingStatus"></p> <!-- Add this element to display "Finished" -->
+    </div>
+  
+  </header>
+  
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if 'votingFinished' flag is set in sessionStorage
+    var votingFinished = sessionStorage.getItem('votingFinished');
+    
+    if (votingFinished === 'true') {
+        // Actions to indicate voting is finished
+        document.getElementById('voteNowBtn').disabled = true;
+        document.getElementById('voteLink').removeAttribute('href');
+        document.getElementById('votingStatus').textContent = 'Finished';
+    } else {
+        // Reset to normal state if 'votingFinished' flag is not set
+        document.getElementById('voteNowBtn').disabled = false;
+        if (!document.getElementById('voteLink').hasAttribute('href')) {
+            document.getElementById('voteLink').setAttribute('href', 'login.html'); // Re-add the link if it was removed
+        }
+        document.getElementById('votingStatus').textContent = ''; // Clear "Finished" text
+    }
+});
+
+function resetVotingStatus() {
+    // Call this function to reset the voting status, e.g., when leaving the page or before finishing voting
+    sessionStorage.removeItem('votingFinished');
+}
+
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

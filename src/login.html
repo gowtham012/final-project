@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Voting LogIn</title>
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+  
+    <div class="login-container">
+      <div class="login-branding">
+          <div class="branding-content">
+            <a href="index.html">
+              <img src="download-removebg-preview.png" alt="Login Icon" >
+            </a>
+            <h1>Electronic Voting Decentralized Application</h1>
+            <p>"Revolutionize Your Voting Experience with E-Voting Solutions: Secure, Efficient, and Accessible Anywhere."</p>
+          </div>
+        </a>
+      </div>
+      
+      <div class="login-form">
+        <div class="form-content">
+          <h2>LogIn</h2>
+          <form onsubmit="verifyLogin(event)">
+            <input type="text" id="username" name="username" placeholder="Aadhar Card Number">
+            <input type="password" id="password" name="password" placeholder="Password">
+            <button type="submit">Submit</button>
+
+          </form>
+        </div>
+      </div>
+      
+    </div>
+</body>
+
+
+
+<script src="script.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1044.0.min.js"></script>
+<script>
+
+AWS.config.update({
+    region: 'us-east-2', // Example region
+    credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-2:d8cdb4e6-1d70-42f9-9759-0f649533ba0f', // Your Cognito Identity Pool ID
+    }),
+});
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+function verifyLogin(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    var aadhar = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+
+    var aadharIdNumeric = parseInt(aadhar, 10);
+    if (isNaN(aadharIdNumeric)) {
+        alert("Please enter a valid Aadhar number.");
+        return;
+    }
+
+    var params = {
+        TableName: 'people',
+        Key: {
+            "Aadhar_ID": aadharIdNumeric // Ensure this matches the DynamoDB primary key attribute name
+        }
+    };
+
+    docClient.get(params, function(err, data) {
+        if (err) {
+            console.error("Error accessing DynamoDB:", err);
+            alert("Authentication failed due to a system error."); 
+        } else {
+            if (data.Item && data.Item.password === password) {
+              if(data.Item.Attempt === 1) { // Check if the attempt is equal to 1
+                sessionStorage.setItem('isAuthenticated', 'true');
+                // updateAttempts(aadharIdNumeric);
+                console.log("Login successful, redirecting...");
+                var fullName = encodeURIComponent(data.Item.First_name + " " + data.Item.last_name);
+                var aadharId = encodeURIComponent(data.Item.Aadhar_ID);
+                console.log('im here')
+                window.location.href = 'vote.html?fullName=' + fullName + '&aadharId=' + aadharId;
+              } 
+              else {
+                console.error('Login attempt not valid.');
+                alert('You have exceeded the number of Voting attempts.');
+              }
+            
+            } 
+            else if (aadhar === "123456789000" && password === "admin") {
+                // This is the default case where specific Aadhar number and password bypass the usual checks
+                console.log("Default admin login successful, redirecting...");
+                // Redirect to vote.html without passing specific user information
+                window.location.href = 'admin.html';
+            }
+            else {
+                console.error('Login failed: Incorrect Aadhar number or password.');
+                alert('Incorrect Aadhar number or password.');
+            }
+        }
+    });
+}
+// function updateAttempts(aadharId) {
+//     var updateParams = {
+//         TableName: 'people',
+//         Key: {
+//             "Aadhar_ID": aadharId
+//         },
+//         UpdateExpression: "set Attempt = :a",
+//         ExpressionAttributeValues: {
+//             ":a": 0
+//         },
+//         ReturnValues: "UPDATED_NEW"
+//     };
+
+//     docClient.update(updateParams, function(err, data) {
+//         if (err) {
+//             console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+//         } else {
+//             console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+//             sessionStorage.setItem('isAuthenticated', 'true');  // Set session storage on successful login
+//             var fullName = encodeURIComponent(data.Item.First_name + " " + data.Item.last_name);
+//             window.location.href = 'vote.html?fullName=' + fullName + '&aadharId=' + aadharId;
+//         }
+//     });
+// }
+
+</script>
+
+</body>
+</html>

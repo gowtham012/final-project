@@ -1,0 +1,64 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #E6E9EC;
+    background-image: url(vote\ copy.webp);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+
+.candidate-container {
+    display: grid;
+    grid-template-columns: auto auto auto; /* Three columns with equal distribution */
+    gap: 2.5vh; /* Space between grid items */
+    justify-content: center; /* Center grid items horizontally when there is extra space in the container */
+    align-content: center; /* Center grid items vertically */
+    padding: 20px; /* Padding around the entire grid */
+    margin: 0 auto; /* Center the container in the body if it's narrower than the body */
+  }
+  
+  .candidate-box {
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    width: 220px; /* Fixed width for each candidate box */
+    height: 220px; /* Fixed height for each candidate box */
+  }
+  
+  /* Add this to center the content of the boxes vertically */
+  .candidate-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .candidate-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* ...rest of your styles... */
+  
+  /* Responsive layout adjustments for smaller screens */
+  @media (max-width: 900px) {
+    .candidate-container {
+      grid-template-columns: repeat(2, 1fr); /* Two columns for medium-sized screens */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .candidate-container {
+      grid-template-columns: 1fr; /* One column for small screens */
+    }
+  }
+  

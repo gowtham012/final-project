@@ -1,0 +1,549 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+  }
+  
+  body {
+    font-family: "Roboto", sans-serif;
+    background-color: #e9eaee;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .center-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 3s ease-in-out, opacity 1s ease-in-out;
+    opacity: 1;
+  }
+  
+  .fade-out {
+    opacity: 0;
+    transform: scale(0);
+  }
+  
+  header {
+    height: 100vh; /* Full height of the viewport */
+    background-image: url(vote\ copy.webp); /* Your background image */
+    background-position: center; /* Center the background image */
+    background-size: cover; /* Cover the entire area of the header */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    width: 100vw; /* Full width of the viewport */
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%; /* Adds some padding on the sides */
+    position: relative; /* Adjusted from fixed to work with example */
+    z-index: 99;
+  }
+  
+  nav img {
+    height: auto; /* Keeps the image's aspect ratio */
+    width: 10%; /* Example size, adjust as needed */
+  }
+  
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0; /* Ensure there's no padding affecting alignment */
+  }
+  
+  nav ul li {
+    margin: 0 20px; /* Example spacing, adjust as needed */
+    padding: 10px; /* Uniform padding for all li elements */
+  }
+  
+  nav ul li a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.5s ease;
+    display: block; /* Make the anchor fill the li for better clickability */
+  }
+  
+  nav ul li a:hover, nav ul li a.active {
+    color: #ee6510; /* Hover and active color */
+  }
+  
+  nav button {
+    padding: 10px; /* Uniform padding for button */
+    background-color:#fec86a ;
+    border: 0.5px solid #fec86a;
+    border-radius: 8px;
+    color: #4a340f;
+    font-size: 14px;
+    transition: all ease 0.5s;
+  }
+  
+  nav button:hover {
+    background-color: #f5a00e;
+    color: #34353b;
+  }
+  
+  .headline {
+    font-size: 5em; /* Adjust size as needed */
+    font-weight: bold; /* Makes text bold */
+    overflow: hidden; /* Hides the sliding text until it's fully visible */
+    display: flex; /* Aligns the spans next to each other */
+    flex-direction: column; /* Stacks children vertically */
+    gap: 10px; /* Adjust the space between words */
+    padding-left: 10%;
+    padding-top: 5%;
+    font-family: "lato", sans-serif;
+  }
+  
+  .slide-in {
+    transform: translateX(-100%);
+    animation: slideIn 1s forwards;
+    animation-delay: var(--delay); /* Uses the custom property for delay */
+    display: block; /* Ensures each span behaves as a block, aiding in the vertical stack */
+  }
+  .highlight {
+    background-color: rgba(255, 235, 59, 0.7); /* Example highlight color, adjust as needed */
+    padding: 0 10px; /* Adjust padding for highlight effect */
+    box-decoration-break: clone; /* Ensures background extends to wrapped text properly */
+    -webkit-box-decoration-break: clone;
+  }
+  .button-container {
+    display: flex; /* Enables Flexbox layout */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 50vh; /* Takes full height of the viewport */
+    padding-bottom: 20px; /* Adds padding at the bottom */
+  }
+  
+  button {
+    padding: 10px; /* Uniform padding for button */
+    border: 0.5px solid#b4a180; 
+    border-radius: 8px;
+
+    font-size: 34px;
+    transition: all ease 0.5s;
+    font-weight: bold; /* Makes text bold */
+    background-color: #fec86a;
+    border: 0;
+    color: #4a340f;
+  }
+  button:hover{
+    background-color: #ce9a0c;
+    color: #000000;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+
+
+
+
+
+
+
+/* 
+  #login page */
+
+
+  .candidate-container {
+    display: grid;
+    grid-template-columns: auto auto auto; /* Three columns with equal distribution */
+    gap: 2.5vh; /* Space between grid items */
+    justify-content: center; /* Center grid items horizontally when there is extra space in the container */
+    align-content: center; /* Center grid items vertically */
+    padding: 20px; /* Padding around the entire grid */
+    margin: 0 auto; /* Center the container in the body if it's narrower than the body */
+  }
+  
+  .candidate-box {
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    width: 220px; /* Fixed width for each candidate box */
+    height: 220px; /* Fixed height for each candidate box */
+  }
+  
+  /* Add this to center the content of the boxes vertically */
+  .candidate-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .candidate-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .button-containerr {
+    display: flex; /* Enables Flexbox layout */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    padding-bottom: 20px; /* Adds padding at the bottom */
+  }
+  
+  
+  .button {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px; /* Uniform padding for button */
+    background-color: #fec86a;
+    border: 0.5px solid #fec86a;
+    border-radius: 8px;
+    color: #4a340f;
+    font-size: 14px;
+    transition: all ease 0.5s;
+  }
+  
+  
+  /* Responsive layout adjustments for smaller screens */
+  @media (max-width: 900px) {
+    .candidate-container {
+      grid-template-columns: repeat(2, 1fr); /* Two columns for medium-sized screens */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .candidate-container {
+      grid-template-columns: 1fr; /* One column for small screens */
+    }
+  }
+  
+
+
+  .candidate-box.selected {
+    border: 2px solid #fec86a; /* Highlight color */
+}
+
+.candidate-radio {
+  position: absolute;
+  top: 10px; /* Adjust based on your design needs */
+  right: 10px; /* Adjust based on your design needs */
+  cursor: pointer;
+}
+
+
+
+/* //section */
+
+
+.headline1 {
+  font-size: 0.4em; 
+  overflow: hidden; /* Hides the sliding text until it's fully visible */
+  display: flex; /* Aligns the spans next to each other */
+  flex-direction: column; /* Stacks children vertically */
+  gap: 10px; /* Adjust the space between words */
+  padding-left: 10%;
+  padding-top: 5%;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal; /* Removes bold formatting */
+}
+
+#contact p {
+  text-transform: lowercase; /* Ensures all text is in lowercase */
+  font-size: 0.8em; /* Decrease the size as needed */
+  font-weight: normal; /* Removes bold formatting */
+  /* Additional styling for the paragraphs */
+}
+
+#contact h2 {
+  font-size: 1.2em; /* Adjust the heading size if needed */
+  text-transform: uppercase; /* Keeps the heading uppercase for stylistic consistency */
+  font-weight: normal; /* Optionally remove bold for the heading too */
+  /* Additional styling for the heading */
+}
+
+.contact-item h5, .contact-item p {
+  display: inline-block; /* Makes elements appear side by side */
+  margin-right: 10px; /* Adds some space between the elements */
+  vertical-align: top; /* Aligns the elements at the top */
+}
+
+
+.rules-container {
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.rule-item {
+  background: #fff;
+  margin: 20px 0;
+  padding: 20px;
+  border-left: 4px solid #007BFF;
+}
+
+.rule-item h2 {
+  margin-top: 0;
+}
+
+.rule-item p {
+  margin: 10px 0;
+}
+.rule-item:hover{
+  color: #ee6510;
+}
+
+
+
+/* video */
+
+.modal {
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 110%; /* Full height */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.modal-content {
+  position: relative; /* For absolute child positioning */
+  padding: 10px;
+  width: 75%; /* 80% of the screen width */
+  max-width: 100%; /* Adjust if necessary to prevent too wide a video on large screens */
+}
+/* Remove default browser controls */
+video {
+  width: 100%; /* Responsive video */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Custom Play and Pause button styles */
+.custom-play-pause {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: none;
+  font-size: 16px;
+}
+
+/* Hide video's default controls */
+video::-webkit-media-controls {
+  display: none;
+}
+
+video::-moz-video-controls {
+  display: none;
+}
+
+video::--webkit-media-controls {
+  display: none;
+}
+
+/* Table styles */
+.table {
+  width: 100%; /* Full-width table */
+  border-collapse: collapse; /* Collapse borders */
+}
+
+.table th, .table td {
+  padding: 15px; /* Padding around text in cells */
+  border: 1px solid #ffffff; /* Light grey border */
+  text-align: left; /* Align text to the left */
+}
+
+/* .table thead {
+  background-color: #ffffff; /* Light grey background for header */
+/* } */ */
+
+.table tbody tr:nth-child(odd) {
+  background-color: #fbfbfb; /* Zebra striping for odd rows */
+}
+
+.table tbody tr:hover {
+  background-color: #9d9292; /* Light grey background on row hover */
+}
+
+/* Header styles */
+.header {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Adjusting the nav bar styling */
+nav ul {
+  list-style-type: none; /* Remove bullets from list */
+  padding: 0;
+}
+
+nav li {
+  display: inline; /* Display list items in a row */
+  margin-right: 10px; /* Space between menu items */
+}
+
+nav a {
+  color: white; /* White text for nav links */
+  text-decoration: none; /* No underline on links */
+}
+
+nav a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+
+
+
+#userInfo {
+  padding-left: 130px; 
+  font-weight: bold;
+  padding-top: 30px; /* Adds padding from the left border */
+  text-align: left;  /* Aligns text to the left */
+  color: #5f4040;  /* Dark grey text for better readability */
+}
+#userAadhar {
+  font-weight: bold;  /* Makes Aadhar number bold */
+  margin-top: 5px;  /* Adds a little space above the Aadhar number for better separation */
+}
+/* voting drop down */
+/* Container for form and dropdown to center it vertically and horizontally */
+ 
+
+
+
+
+select.form-control {
+  width: 100%;  /* Full width of its parent */
+  padding: 12px 20px;  /* Ample padding for easy interaction */
+  font-size: 16px;  /* Increased font size for better readability */
+  margin-bottom: 20px;  /* Adds space below the dropdown */
+  display: block;  /* Ensures the dropdown is a block element to fit full width */
+  border: 1px solid #ccc;  /* Subtle border styling */
+  border-radius: 4px;  /* Rounded corners */
+  appearance: none; /* Removes default system appearance to allow custom styling */
+  background-image: url('down-arrow.png'); /* Custom dropdown arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Positions the arrow to the right */
+  background-size: 12px; /* Size of the arrow */
+  color: #444; /* Color of the text */
+  cursor: pointer; /* Indicates the dropdown can be interacted with */
+}
+
+/* Style for the disabled option to differentiate it */
+select.form-control option[disabled] {
+  color: grey; /* Grey out the placeholder option */
+}
+
+
+.select.form-control:focus {
+  color: #333; /* Darker text color when focused */
+  border-color: #888; /* Darker border when the dropdown is active */
+}
+
+.button-c {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px; /* Space above the button */
+}
+
+button.btn.btn-primary {
+  padding: 10px 20px;
+  font-size: 18px; /* Adjusted font size for readability */
+  background-color: #fec86a; /* Consistent with previous styling */
+  border-radius: 8px; /* Rounded borders */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+button.btn.btn-primary:hover {
+  background-color: #ce9a0c; /* Darker shade on hover for visual feedback */
+}
+
+
+
+/* dropdown */
+
+/* General styling for the dropdown, adjusted for plain CSS */
+
+.select-label {
+  font-weight: bold; /* Makes text bold */
+  margin-right: 10px; /* Space between label and the dropdown */
+  white-space: nowrap;
+  font-size: 16px; /* Prevents the label from wrapping */
+}
+
+
+
+/* General style adjustments */
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Styling for the form group to align label and select side by side */
+.form-group {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the middle */
+  font-size: 16px; /* Font size for better readability */
+  width: 100%; /* Full width to contain both label and dropdown */
+  margin-bottom: 20px; /* Space below the form group */
+}
+
+/* Specific styling for the select label */
+.select-label {
+  font-weight: bold; /* Makes text bold */
+  margin-right: 10px; /* Space between label and the dropdown */
+  white-space: nowrap; /* Ensures label does not break into multiple lines */
+  font-size: 25px;
+  color: #825405;/* Increased font size from 16px to 20px for better visibility */
+}
+
+/* Styling for the dropdown */
+
+
+/* Centering the button */
+.button-c {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  width: 100%; /* Full width for alignment */
+  padding-top: 20px; /* Space above the button */
+}
+
+/* Centering the account information */
+#accountAddress {
+  text-align: center; /* Centers the text */
+  width: 100%; /* Full width for alignment */
+  margin-top: 20px; /* Space above the account info */
+  font-size: 18px; /* Increased font size for better visibility */
+}
+

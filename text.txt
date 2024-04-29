@@ -1,0 +1,5 @@
+nvm install 18
+
+npm install -g truffle
+
+truffle migrate --reset
