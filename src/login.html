@@ -103,30 +103,7 @@ function verifyLogin(event) {
         }
     });
 }
-// function updateAttempts(aadharId) {
-//     var updateParams = {
-//         TableName: 'people',
-//         Key: {
-//             "Aadhar_ID": aadharId
-//         },
-//         UpdateExpression: "set Attempt = :a",
-//         ExpressionAttributeValues: {
-//             ":a": 0
-//         },
-//         ReturnValues: "UPDATED_NEW"
-//     };
 
-//     docClient.update(updateParams, function(err, data) {
-//         if (err) {
-//             console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-//         } else {
-//             console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
-//             sessionStorage.setItem('isAuthenticated', 'true');  // Set session storage on successful login
-//             var fullName = encodeURIComponent(data.Item.First_name + " " + data.Item.last_name);
-//             window.location.href = 'vote.html?fullName=' + fullName + '&aadharId=' + aadharId;
-//         }
-//     });
-// }
 
 </script>
 

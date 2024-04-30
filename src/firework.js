@@ -1,94 +1,7 @@
-window.addEventListener('load', () => {
-    // Target the image with the zoom animation
-    const image = document.querySelector('.zoom-animation');
-    setTimeout(() => {
-      // Start the fade-out effect
-      image.classList.add('fade-out');
-      // After the fade-out effect, hide the image and show the main content
-      setTimeout(() => {
-        image.style.display = 'none'; // Hide the image
-        document.getElementById('mainContent').style.display = 'block'; // Show the main content
-        document.getElementById('mainContent').style.opacity = 0;
-        setTimeout(() => {
-          document.getElementById('mainContent').style.opacity = 1;
-          document.getElementById('mainContent').style.transition = 'opacity 2s ease-in-out';
-        }, 100); // Slightly delay the opacity transition for smoothness
-      }, 5000); // This should match the length of the CSS transition
-    }, 1000); // Start after a short delay to ensure the page is ready
-  });
-
-  
-window.addEventListener('load', () => {
-    // Target the image with the zoom animation
-    const image = document.querySelector('.center-screen.zoom-animation');
-  
-    // Set a timeout to start the fade-out effect after the page loads
-    setTimeout(() => {
-      // Apply the fade-out effect to the image
-      image.classList.add('fade-out');
-  
-      // Once the fade-out transition is complete, switch to the main content
-      setTimeout(() => {
-        // Hide the image
-        image.style.display = 'none';
-        
-        // Show the main content
-        const mainContent = document.getElementById('mainContent');
-        mainContent.classList.remove('hidden');
-        
-        // Optionally, you can apply a fade-in effect to the main content here
-        mainContent.classList.add('fade-in'); // Ensure you define this class in your CSS
-      }, 5000); // This timeout duration should match the total duration of the CSS transitions
-    }, 1000); // Delay the start of the animation to ensure the page is fully loaded
-  });
-  
-  document.getElementById('myButton').onclick = function() {
-    window.location.href = 'login.html';
-};
-
-
-
-
-
-window.addEventListener('load', function() {
-  const backgroundVideo = document.getElementById('backgroundVideo');
-
-  // Wait 3 seconds before playing the video
-  setTimeout(function() {
-      backgroundVideo.play();
-  }, 3000);
-});
-
-
-
-function logout() {
-  // Clear the session storage
-  sessionStorage.removeItem('isAuthenticated');
-
-  // Redirect to login
-  window.location.href = 'login.html';
-}
-
-
-function checkAuthentication() {
-  console.log("Checking authentication...");
-  if (!sessionStorage.getItem('isAuthenticated')) {
-      console.log("Not authenticated, redirecting...");
-      window.location.href = 'login.html';
-  } else {
-      console.log("Authenticated, initializing page...");
-      initPage();
-  }
-}
-
-
-// fireworks
-
-
-var bits=100; // how many bits
-var speed=30; // how fast - smaller is faster
+var bits=170; // how many bits
+var speed=20; // how fast - smaller is faster
 var bangs=26; // how many can be launched simultaneously (note that using too many can slow the script down)
-var colours=new Array("#03f", "#f03", "#0e0", "#93f", "#0cf", "#f93", "#f0c"); 
+var colours=new Array("#03f", "#f03", "#0e0", "#93f", "#0cf", "#f93", "#f0c" ); 
  
 /****************************
  
@@ -118,24 +31,35 @@ if (typeof('addRVLoadEvent')!='function') function addRVLoadEvent(funky) {
 
 addRVLoadEvent(light_blue_touchpaper);
 
-function light_blue_touchpaper() { if (document.getElementById) {
-  var i;
-  boddie=document.createElement("div");
-  boddie.style.position="fixed";
-  boddie.style.top="0px";
-  boddie.style.left="0px";
-  boddie.style.overflow="visible";
-  boddie.style.width="1px";
-  boddie.style.height="1px";
-  boddie.style.backgroundColor="transparent";
-  document.body.appendChild(boddie);
-  set_width();
-  for (i=0; i<bangs; i++) {
-    write_fire(i);
-    launch(i);
-    setInterval('stepthrough('+i+')', speed);
+// Fireworks script adjusted to launch from a specific container
+function light_blue_touchpaper(container) { 
+  if (document.getElementById) {
+    var i;
+    boddie = document.createElement("div");
+    boddie.style.position = "absolute";
+    boddie.style.top = "0px";
+    boddie.style.left = "0px";
+    boddie.style.overflow = "visible";
+    boddie.style.width = "100%";
+    boddie.style.height = "100%";
+    boddie.style.backgroundColor = "transparent";
+    container.appendChild(boddie);
+    set_width(container);
+    for (i = 0; i < bangs; i++) {
+      write_fire(i);
+      launch(i);
+      setInterval('stepthrough(' + i + ')', speed);
+    }
   }
-}}
+}
+
+// Adjust set_width function to use the width and height of the container
+function set_width(container) {
+  if (container) {
+    swide = container.offsetWidth;
+    shigh = container.offsetHeight;
+  }
+}
 
 function write_fire(N) {
   var i, rlef, rdow;
@@ -242,4 +166,4 @@ function set_width() {
   swide=sw_min;
   shigh=sh_min;
 }
-// ]]>
+

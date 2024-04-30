@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>E-voting</title>
 <link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -19,10 +21,12 @@
    
         
       <ul>
+        <li><div id="clock" class="clock"></div></li>
+
         <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html" >About</a></li>
           <li><a href="rules.html">Rules</a></li>
-          <li><a href="https://www.timesnownews.com/india/vote-from-home-what-is-home-voting-who-is-eligible-how-to-apply-all-questions-answered-article-104333445">News</a></li>
+          <li><a href="news.html">News</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="results.html">Result</a></li>
       </ul>
@@ -54,5 +58,40 @@
 
 
 <script src="script.js"></script>
+<script>
+  function updateClock() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  var timeString = hours + ':' + minutes + ':' + seconds;
+
+  // Update the clock on the web page
+  document.getElementById('clock').textContent = timeString;
+
+  // Check if the current time is 14:30 or later
+  if (hours >= 14 && minutes >= 34) {
+    // Disable the vote button
+    var voteNowBtn = document.getElementById('voteNowBtn');
+    if (voteNowBtn) {
+      voteNowBtn.disabled = true;
+      // Optionally update the button text
+      voteNowBtn.textContent = 'Election Ended';
+    }
+    // If you are using a link around the button, you can remove the href attribute
+    var voteLink = document.getElementById('voteLink');
+    if (voteLink) {
+      voteLink.removeAttribute('href');
+    }
+  }
+}
+
+// Call the updateClock function every second
+setInterval(updateClock, 1000);
+// Also call the function immediately to check the time on page load
+updateClock();
+</script>
 </body>
 </html>

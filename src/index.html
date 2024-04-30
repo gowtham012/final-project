@@ -5,12 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>E-voting</title>
 <link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- <style>
+    .clock-container {
+        text-align: right; /* Aligns the clock to the right */
+        padding: 10px; /* Adds padding around the clock */
+    }
+
+    .clock {
+    font-family: 'Orbitron', sans-serif;
+    color: rgb(101, 209, 208); /* Red text color */
+    font-size: 35px; /* Adjust size as needed */
+    text-shadow:
+        0 0 5px rgb(88, 247, 244), /* Innermost shadow for glow effect */
+        0 0 5px rgb(88, 247, 244), /* Middle shadow for glow effect */
+        0 0 5px rgb(88, 247, 244), /* Outermost shadow for glow effect */
+        0 0 5px rgb(88, 247, 244); /* Additional outer glow */
+    display: inline-block; /* Allows padding to take effect */
+    background: transparent; /* Ensures no background */
+} -->
+
+
+</style>
 </head>
 <body>
 
-    <img src="download-removebg-preview.png" alt="Login Icon" class="center-screen zoom-animation">
-
-
+<img src="download-removebg-preview.png" alt="Login Icon" class="center-screen zoom-animation">
 
 <div id="mainContent" class="hidden">
   <header>
@@ -18,62 +39,93 @@
         <img src="download-removebg-preview.png" alt="">
         
         <ul>
+          <li><div id="clock" class="clock"></div></li>
           <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html" >About</a></li>
-            <li><a href="rules.html">Rules</a></li>
-            <li><a href="https://www.timesnownews.com/india/vote-from-home-what-is-home-voting-who-is-eligible-how-to-apply-all-questions-answered-article-104333445">News</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="results.html">Result</a></li>
+          <li><a href="about.html" >About</a></li>
+          <li><a href="rules.html">Rules</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="results.html">Result</a></li>
+            
         </ul>
-        <!-- <button>Log In</button> -->
     </nav>
-    
+    <!-- <div class="clock-container">
+      
+    </div> -->
     <div class="headline">
       <span class="slide-in" style="--delay:0s;"><span class="highlight">Your Voice</span></span>
       <span class="slide-in" style="--delay:0.5s;"><span class="highlight">Your Vote</span></span>
       <span class="slide-in" style="--delay:1s;"><span class="highlight">Our Future</span></span>
     </div>
-
+    
     <div class="button-container">
       <a href="login.html" id="voteLink">
         <button id="voteNowBtn">Vote Now</button>
       </a>
-      <p id="votingStatus"></p> <!-- Add this element to display "Finished" -->
+      
     </div>
   
   </header>
   
 </div>
 
-
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if 'votingFinished' flag is set in sessionStorage
     var votingFinished = sessionStorage.getItem('votingFinished');
     
     if (votingFinished === 'true') {
-        // Actions to indicate voting is finished
         document.getElementById('voteNowBtn').disabled = true;
         document.getElementById('voteLink').removeAttribute('href');
         document.getElementById('votingStatus').textContent = 'Finished';
     } else {
-        // Reset to normal state if 'votingFinished' flag is not set
         document.getElementById('voteNowBtn').disabled = false;
         if (!document.getElementById('voteLink').hasAttribute('href')) {
-            document.getElementById('voteLink').setAttribute('href', 'login.html'); // Re-add the link if it was removed
+            document.getElementById('voteLink').setAttribute('href', 'login.html');
         }
-        document.getElementById('votingStatus').textContent = ''; // Clear "Finished" text
+        document.getElementById('votingStatus').textContent = '';
     }
 });
 
 function resetVotingStatus() {
-    // Call this function to reset the voting status, e.g., when leaving the page or before finishing voting
     sessionStorage.removeItem('votingFinished');
 }
 
-</script>
+function updateClock() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  var timeString = hours + ':' + minutes + ':' + seconds;
 
+  // Update the clock on the web page
+  document.getElementById('clock').textContent = timeString;
+
+  // Check if the current time is 14:30 or later
+  if (hours >= 14 && minutes >= 34) {
+    // Disable the vote button
+    var voteNowBtn = document.getElementById('voteNowBtn');
+    if (voteNowBtn) {
+      voteNowBtn.disabled = true;
+      // Optionally update the button text
+      voteNowBtn.textContent = 'Election Ended';
+    }
+    // If you are using a link around the button, you can remove the href attribute
+    var voteLink = document.getElementById('voteLink');
+    if (voteLink) {
+      voteLink.removeAttribute('href');
+    }
+  }
+}
+
+// Call the updateClock function every second
+setInterval(updateClock, 1000);
+// Also call the function immediately to check the time on page load
+updateClock();
+
+
+</script>
 <script src="script.js"></script>
 </body>
 </html>

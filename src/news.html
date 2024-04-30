@@ -21,66 +21,23 @@
         <img src="download-removebg-preview.png" alt="">
         
         <ul>
-            <li><div id="clock" class="clock"></div></li>
+          <li><div id="clock" class="clock"></div></li>
             <li><a href="index.html" class="active">Home</a></li>
               <li><a href="about.html" >About</a></li>
               <li><a href="rules.html">Rules</a></li>
-              <li><a href="news.html">News</a></li>
+              <li><a href="https://www.timesnownews.com/india/vote-from-home-what-is-home-voting-who-is-eligible-how-to-apply-all-questions-answered-article-104333445">News</a></li>
               <li><a href="contact.html">Contact</a></li>
               <li><a href="results.html">Result</a></li>
         </ul>
-        <!-- <button>Log In</button> -->
     </nav>
-    
+    <iframe width="1800" height="820" src="https://www.youtube.com/embed/II_m28Bm-iM?si=2dhSAW3ljRGHUbRp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="padding-left: 70px;"></iframe>
     
   
   </header>
-  <div id="aboutModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <video id="aboutVideo" autoplay>
-            <source src="VIDEO-2024-03-18-11-23-38.mp4" type="video/mp4">
-        </video>        
-    </div>
 </div>
-
-
 <script src="script.js"></script>
 <script>
-    // Get the modal
-    var modal = document.getElementById("aboutModal");
-    
-    // Get the button that opens the modal
-    var btn = document.querySelector("a.active");
-    
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-        // Optionally play the video
-        document.getElementById("aboutVideo").play();
-    }
-    
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-        // Optionally pause the video
-        document.getElementById("aboutVideo").pause();
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-            // Optionally pause the video
-            document.getElementById("aboutVideo").pause();
-        }
-    }
-
-
-    function updateClock() {
+  function updateClock() {
   var now = new Date();
   var hours = now.getHours();
   var minutes = now.getMinutes();
@@ -113,7 +70,7 @@
 setInterval(updateClock, 1000);
 // Also call the function immediately to check the time on page load
 updateClock();
-    </script>
-    
+</script>
+
 </body>
 </html>

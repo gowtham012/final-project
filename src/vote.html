@@ -8,6 +8,8 @@
         <title>E-voting</title>
         <link rel="stylesheet" href="styles.css">
         <link href="src/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         <!-- <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://unpkg.com/@truffle/contract/dist/truffle-contract.min.js"></script> -->
@@ -23,12 +25,15 @@
         <img src="download-removebg-preview.png" alt="">
         
         <ul>
+            <li><div id="clock" class="clock"></div></li>
+
           <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html" >About</a></li>
             <li><a href="rules.html">Rules</a></li>
-            <li><a href="https://www.timesnownews.com/india/vote-from-home-what-is-home-voting-who-is-eligible-how-to-apply-all-questions-answered-article-104333445">News</a></li>
+            <li><a href="news.html">News</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="results.html">Result</a></li>
+            
         </ul>
     </nav>
     <div id="userInfo">
@@ -246,7 +251,41 @@ window.addEventListener('load', fetchCandidates);
     }
 </script>
 
+<script>
+    function updateClock() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  var timeString = hours + ':' + minutes + ':' + seconds;
 
+  // Update the clock on the web page
+  document.getElementById('clock').textContent = timeString;
+
+  // Check if the current time is 14:30 or later
+  if (hours >= 14 && minutes >= 34) {
+    // Disable the vote button
+    var voteNowBtn = document.getElementById('voteNowBtn');
+    if (voteNowBtn) {
+      voteNowBtn.disabled = true;
+      // Optionally update the button text
+      voteNowBtn.textContent = 'Election Ended';
+    }
+    // If you are using a link around the button, you can remove the href attribute
+    var voteLink = document.getElementById('voteLink');
+    if (voteLink) {
+      voteLink.removeAttribute('href');
+    }
+  }
+}
+
+// Call the updateClock function every second
+setInterval(updateClock, 1000);
+// Also call the function immediately to check the time on page load
+updateClock();
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
